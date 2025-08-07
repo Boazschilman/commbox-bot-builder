@@ -1,1 +1,39 @@
-
+{
+  "name": "commbox-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Commbox Bot Builder - Converts Draw.io files to Commbox XML format",
+  "main": "src/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "commbox",
+    "drawio",
+    "xml",
+    "converter",
+    "bot",
+    "api"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "multer": "^1.4.5-lts.1",
+    "pako": "^2.1.0",
+    "xml2js": "^0.6.2",
+    "morgan": "^1.10.0",
+    "helmet": "^7.1.0",
+    "compression": "^1.7.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
