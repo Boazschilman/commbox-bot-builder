@@ -71,14 +71,11 @@ function decodeDrawio(compressedContent) {
 // Helper function to parse Draw.io file
 async function parseDrawioFile(fileContent) {
   const parser = new xml2js.Parser();
-  
   try {
     // Parse the outer XML
     const result = await parser.parseStringPromise(fileContent);
-    
     // Find the diagram content - check different possible structures
     let diagramContent = null;
-    
     if (result.mxfile && result.mxfile.diagram) {
       diagramContent = result.mxfile.diagram[0];
     } else if (result.diagram) {
@@ -105,15 +102,13 @@ async function parseDrawioFile(fileContent) {
     
     // Decode the compressed content
     const decodedContent = decodeDrawio(compressedData);
-    
     // Parse the decoded mxGraphModel
     const graphModel = await parser.parseStringPromise(decodedContent);
-    
     // Extract nodes and connections
     const nodes = extractNodes(graphModel);
     const connections = extractConnections(graphModel);
-    
-    return { nodes, connections };
+    // Return the decoded XML string as well
+    return { nodes, connections, mxGraphModelXml: decodedContent };
   } catch (error) {
     console.error('Parse error:', error);
     throw error;
