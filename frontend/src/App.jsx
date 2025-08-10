@@ -364,7 +364,7 @@ function App() {
                 exit={{ opacity: 0, scale: 0.9 }}
                 className="text-center"
               >
-                <div className="text-6xl mb-4">🎉</div>
+              <div className="text-6xl mb-4">🎉</div>
                 <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-gray-800">
                   הבוט שלך מוכן!
                 </h2>
@@ -373,14 +373,26 @@ function App() {
                   <p className="text-lg text-green-800 mb-4">
                     ✅ קובץ ה-XML נוצר בהצלחה
                   </p>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={downloadXML}
-                    className="px-8 py-3 bg-green-600 text-white rounded-full font-bold text-lg hover:bg-green-700 transition-all"
-                  >
-                    ⬇️ הורד קובץ XML
-                  </motion.button>
+                  <div className="flex flex-col items-center gap-4">
+                    {/* Main Download Button */}
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={downloadXML}
+                      className="w-full px-8 py-3 bg-green-600 text-white rounded-full font-bold text-lg hover:bg-green-700 transition-all"
+                    >
+                      ⬇️ הורד קובץ Commbox XML
+                    </motion.button>
+                    {/* NEW: Temporary Download Button */}
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={downloadMxGraphModelXML}
+                      className="w-full px-8 py-3 bg-gray-600 text-white rounded-full font-semibold hover:bg-gray-700 transition-all text-base"
+                    >
+                      🔧 הורד קובץ mxGraphModel (שלב ביניים)
+                    </motion.button>
+                  </div>
                 </div>
 
                 {result.xml && (
