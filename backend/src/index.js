@@ -432,29 +432,26 @@ app.post('/api/converter/convert', upload.single('drawioFile'), async (req, res)
     }
     
     console.log('Processing file:', req.file.originalname);
-    
     // Get file content
     const fileContent = req.file.buffer.toString('utf-8');
-    
     // Parse Draw.io file
     const parsedData = await parseDrawioFile(fileContent);
     
     console.log(`Parsed ${parsedData.nodes.length} nodes and ${parsedData.connections.length} connections`);
-    
     // Generate Commbox XML
     const xml = generateCommboxXML(parsedData);
-    
-    // Send response
+    // Send response with both final and intermediate files
     res.json({
       success: true,
       xml: xml,
+      mxGraphModelXml: parsedData.mxGraphModelXml,
       filename: `commbox_bot_${Date.now()}.xml`,
+      mxGraphModelFilename: `mxGraphModel_${Date.now()}.xml`,
       stats: {
         nodesCount: parsedData.nodes.length,
         connectionsCount: parsedData.connections.length
       }
     });
-    
   } catch (error) {
     console.error('Conversion error:', error);
     res.status(500).json({
