@@ -14,6 +14,7 @@ function App() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [result, setResult] = useState(null);
 
+
   // File upload handler
   const onDrop = useCallback((acceptedFiles) => {
     if (acceptedFiles.length > 0) {
@@ -92,6 +93,23 @@ function App() {
     URL.revokeObjectURL(url);
     toast.success('הקובץ הורד בהצלחה!');
   };
+
+  // NEW: Download intermediate mxGraphModel XML
+  const downloadMxGraphModelXML = () => {
+    if (!result || !result.mxGraphModelXml) return;
+    const blob = new Blob([result.mxGraphModelXml], { type: 'text/xml;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = result.mxGraphModelFilename || `mxGraphModel_${Date.now()}.xml`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    toast.success('קובץ mxGraphModel הורד בהצלחה!');
+  };
+
+
 
   // Reset
   const resetProcess = () => {
